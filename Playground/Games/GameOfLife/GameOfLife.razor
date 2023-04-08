@@ -1,0 +1,21 @@
+﻿@page "/gol"
+
+<div style="width: 675px;">
+	<MudGrid Spacing="1" Justify="Justify.Center">
+		@for (int i = 0; i < 400; i++)
+		{
+			int localIndex = i;
+			<MudItem>
+				<MudPaper Style="@SetStyle(localIndex)" Height="25px" Width="25px">
+					<MudIconButton DisableRipple="true" OnClick="(()=>UpdateCell(localIndex))" Size="Size.Large" />
+				</MudPaper>
+			</MudItem>
+		}
+	</MudGrid>
+	<br />
+</div>
+
+<div style="display: flex; align-items: center">
+	<MudButton Variant="Variant.Outlined" Color="Color.Success">Start</MudButton>
+	<MudButton Variant="Variant.Outlined" Color="Color.Error">Stop</MudButton>
+</div>
