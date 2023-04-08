@@ -6,7 +6,7 @@ namespace Playground.Games.GameOfLife
 	{
 		public int CellCount = 400;
 		private int[] _cellStatus;
-		private bool _gameStarted = false;
+		private bool _gameRunning = false;
 		public override Task SetParametersAsync(ParameterView parameters)
 		{
 			_cellStatus = Enumerable.Repeat(0, CellCount).ToArray();
@@ -16,6 +16,9 @@ namespace Playground.Games.GameOfLife
 
 		void UpdateCell(int index)
 		{
+			if(_gameRunning)
+				return;
+
 			_cellStatus[index] = _cellStatus[index] is 0 ? 1 : 0;
 			Console.WriteLine($"Cell[{index}] = {_cellStatus[index]}");
 			StateHasChanged();
@@ -31,20 +34,33 @@ namespace Playground.Games.GameOfLife
 			return "background: #1CFF8A";
 		}
 
-		void StartGame()
+		async Task StartGameAsync()
 		{
-			//if (_gameStarted)
-			//{
-			//	Console.Error.WriteLine("Game is already started");
-			//	return;
-			//}
+			if (_gameRunning)
+			{
+				Console.Error.WriteLine("Game is already started");
+				return;
+			}
 
 			GameOfLifeService.Setup(_cellStatus);
-			_gameStarted = true;
+			_gameRunning = true;
 
-			//TODO: Add stopper
-			_cellStatus = GameOfLifeService.Run();
-			StateHasChanged();
+			while (_gameRunning)
+			{
+				_cellStatus = GameOfLifeService.Run();
+				StateHasChanged();
+				await Task.Delay(TimeSpan.FromSeconds(1));
+
+				if (!_cellStatus.Any(x => x is 1))
+				{
+					_gameRunning = false;
+				}
+			}
+		}
+
+		void Stop()
+		{
+			_gameRunning = false;
 		}
 	}
 }

@@ -1,6 +1,8 @@
 ﻿@page "/gol"
 @using Playground.Games.GameOfLife.Service
 @inject IGameOfLifeService GameOfLifeService
+<h2>Game Of Live</h2>
+<br/>
 <div style="width: 675px;">
 	<MudGrid Spacing="1" Justify="Justify.Center">
 		@for (int i = 0; i < 400; i++)
@@ -17,6 +19,6 @@
 </div>
 
 <div style="display: flex; align-items: center">
-	<MudButton OnClick="(()=>StartGame())" Variant="Variant.Outlined" Color="Color.Success">Start</MudButton>
-	<MudButton Variant="Variant.Outlined" Color="Color.Error">Stop</MudButton>
+	<MudButton OnClick="@(async ()=>await StartGameAsync().ConfigureAwait(true))" Variant="Variant.Outlined" Color="Color.Success">Start</MudButton>
+	<MudButton Style="margin-left: 5px" OnClick="(Stop)" Variant="Variant.Outlined" Color="Color.Error">Stop</MudButton>
 </div>
