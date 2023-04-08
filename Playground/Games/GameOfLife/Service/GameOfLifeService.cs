@@ -55,14 +55,12 @@ namespace Playground.Games.GameOfLife.Service
 
 			    int IsAlive(int totalNeighborsAlive, int currentStatus)
 			    {
-				    int neighborsNeededToBeAlive = 3;
-
-				    if (currentStatus is 1)
+				    if (IsDead(currentStatus))
 				    {
-					    neighborsNeededToBeAlive = 2;
+					    return totalNeighborsAlive == 3 ? 1 : 0;
 				    }
 
-				    return totalNeighborsAlive >= neighborsNeededToBeAlive ? 1: 0;
+					return totalNeighborsAlive is 2 or 3 ? 1 : 0;
 			    }
 		    }
 	    }
@@ -98,6 +96,8 @@ namespace Playground.Games.GameOfLife.Service
 
 		//TODO: Setup matrix limit dynamically
 	    private bool IsInsideMatrix((int i, int j) indexes) => indexes.i is >= 0 and < 20 && indexes.j is >= 0 and < 20;
+	    private bool IsDead(int currentStatus) => currentStatus is 0;
+	    private bool IsAlive(int currentStatus) => currentStatus is 1;
     }
 
     enum CellNeighbors
