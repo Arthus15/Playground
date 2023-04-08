@@ -1,5 +1,6 @@
 ﻿@page "/gol"
-
+@using Playground.Games.GameOfLife.Service
+@inject IGameOfLifeService GameOfLifeService
 <div style="width: 675px;">
 	<MudGrid Spacing="1" Justify="Justify.Center">
 		@for (int i = 0; i < 400; i++)
@@ -16,6 +17,6 @@
 </div>
 
 <div style="display: flex; align-items: center">
-	<MudButton Variant="Variant.Outlined" Color="Color.Success">Start</MudButton>
+	<MudButton OnClick="(()=>StartGame())" Variant="Variant.Outlined" Color="Color.Success">Start</MudButton>
 	<MudButton Variant="Variant.Outlined" Color="Color.Error">Stop</MudButton>
 </div>
