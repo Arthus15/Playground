@@ -6,7 +6,7 @@ namespace Playground.Games.GameOfLife
 	{
 		public int CellCount = 400;
 		private int[] _cellStatus;
-		private bool _gameRunning = false;
+		private bool _gameRunning;
 		public override Task SetParametersAsync(ParameterView parameters)
 		{
 			_cellStatus = Enumerable.Repeat(0, CellCount).ToArray();
@@ -49,7 +49,7 @@ namespace Playground.Games.GameOfLife
 			{
 				_cellStatus = GameOfLifeService.Run();
 				StateHasChanged();
-				await Task.Delay(TimeSpan.FromSeconds(1));
+				await Task.Delay(TimeSpan.FromMilliseconds(50));
 
 				if (!_cellStatus.Any(x => x is 1))
 				{
