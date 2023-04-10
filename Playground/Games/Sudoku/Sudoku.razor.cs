@@ -33,5 +33,11 @@ namespace Playground.Games.Sudoku
 
 			return base.SetParametersAsync(parameters);
 		}
+
+		public void Resolve()
+		{
+			Board = SudokuService.Run(Board!);
+			StateHasChanged();
+		}
 	}
 }

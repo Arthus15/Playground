@@ -2,5 +2,6 @@
 {
 	public interface ISudokuService
 	{
+		int[][] Run(int[][] board);
 	}
 }

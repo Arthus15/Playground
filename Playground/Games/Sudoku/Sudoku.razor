@@ -1,4 +1,6 @@
 ﻿@page "/sudoku"
+@using Playground.Games.Sudoku.Service
+@inject ISudokuService SudokuService
 <h2>Sudoku</h2>
 <br />
 <MudContainer MaxWidth="MaxWidth.Small">
@@ -21,3 +23,5 @@
 		}
 	</MudGrid>
 </MudContainer>
+<br/>
+<MudButton OnClick="@(Resolve)" Variant="Variant.Outlined" Color="Color.Success">Resolve</MudButton>
