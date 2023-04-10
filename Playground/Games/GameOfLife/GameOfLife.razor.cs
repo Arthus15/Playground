@@ -5,7 +5,7 @@ namespace Playground.Games.GameOfLife
 	public partial class GameOfLife : ComponentBase
 	{
 		public int CellCount = 400;
-		private int[] _cellStatus;
+		private int[]? _cellStatus;
 		private bool _gameRunning;
 		public override Task SetParametersAsync(ParameterView parameters)
 		{
@@ -19,14 +19,14 @@ namespace Playground.Games.GameOfLife
 			if(_gameRunning)
 				return;
 
-			_cellStatus[index] = _cellStatus[index] is 0 ? 1 : 0;
+			_cellStatus![index] = _cellStatus[index] is 0 ? 1 : 0;
 			Console.WriteLine($"Cell[{index}] = {_cellStatus[index]}");
 			StateHasChanged();
 		}
 
 		string SetStyle(int index)
 		{
-			if (_cellStatus[index] is 0)
+			if (_cellStatus![index] is 0)
 			{
 				return "background: #ffffff";
 			}
@@ -42,7 +42,7 @@ namespace Playground.Games.GameOfLife
 				return;
 			}
 
-			GameOfLifeService.Setup(_cellStatus);
+			GameOfLifeService.Setup(_cellStatus!);
 			_gameRunning = true;
 
 			while (_gameRunning)

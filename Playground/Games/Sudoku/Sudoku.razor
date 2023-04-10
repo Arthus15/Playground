@@ -1,0 +1,23 @@
+﻿@page "/sudoku"
+<h2>Sudoku</h2>
+<br />
+<MudContainer MaxWidth="MaxWidth.Small">
+	<MudGrid Spacing="1" Justify="Justify.Center">
+		@for (int i = 0; i < 9; i++)
+		{
+			@for (int j = 0; j < 9; j++)
+			{
+				int localI = i;
+				int localJ = j;
+				<MudItem Style="flex: 1 0 11%">
+					<MudPaper Height="50px" Width="50px">
+						<MudText Style="padding-top: 5px" Typo="Typo.h4" Align="Align.Center">@if (Board is not null && Board![localI][localJ] is not 0)
+						                                                                      {
+							                                                                      @Board[localI][localJ];
+						                                                                      }</MudText>
+					</MudPaper>
+				</MudItem>
+			}
+		}
+	</MudGrid>
+</MudContainer>
