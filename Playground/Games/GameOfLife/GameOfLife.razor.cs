@@ -49,7 +49,7 @@ namespace Playground.Games.GameOfLife
 			{
 				_cellStatus = GameOfLifeService.Run();
 				StateHasChanged();
-				await Task.Delay(TimeSpan.FromMilliseconds(50));
+				await Task.Delay(TimeSpan.FromMilliseconds(150));
 
 				if (!_cellStatus.Any(x => x is 1))
 				{
