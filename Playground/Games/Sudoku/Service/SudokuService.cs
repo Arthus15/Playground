@@ -36,6 +36,7 @@ public class SudokuService : ISudokuService
 			{
 				cell.Clean(_board);
 				it--;
+				cell.ResetUsedValues();
 			}
 
 			if (it == -1)

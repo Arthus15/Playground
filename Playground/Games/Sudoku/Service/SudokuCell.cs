@@ -5,7 +5,7 @@ public class SudokuCell
 	public int X { get; set; }
 	public int Y { get; set; }
 	public Tuple<int, int> Quadrant { get; set; }
-	private List<int> _usedValues { get; } = new();
+	private List<int> _usedValues { get; set; } = new();
 
 	private static readonly int[] _posibleValues = Enumerable.Range(1, 9).ToArray();
 	private static readonly Tuple<int, int>[] _quadrants =
@@ -68,6 +68,11 @@ public class SudokuCell
 	public void Clean(int[][] board)
 	{
 		board[X][Y] = 0;
+	}
+
+	public void ResetUsedValues()
+	{
+		_usedValues = new List<int>();
 	}
 
 	private Tuple<int, int> GetQuadrant()
